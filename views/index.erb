@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= my_name %> の <%= coin_name %> 資産</title>
+    <style>
+      body {
+        text-align: center;
+      }
+      span.name {
+        font-weight: bold;
+      }
+      span.total {
+        font-weight: bold;
+        font-size: 200%
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div>
+        <span class="name"><%= my_name %></span>の<%= coin_name %>資産は、現在
+      </div>
+      <div>
+        <span class="total"><%= total %></span> <%= currency %>
+      </div>
+      <div>
+        です！
+      </div>
+    </section>
+  </body>
+</html>
