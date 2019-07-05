@@ -7,12 +7,26 @@
       body {
         text-align: center;
       }
+      section {
+        margin: 1em auto;
+      }
       span.name {
         font-weight: bold;
       }
       span.total {
         font-weight: bold;
-        font-size: 200%
+        font-size: 200%;
+      }
+      span.up {
+        font-weight: bold;
+        color: green;
+      }
+      span.up::before {
+        content: '+'
+      }
+      span.down {
+        font-weight: bold;
+        color: red;
       }
     </style>
   </head>
@@ -26,6 +40,17 @@
       </div>
       <div>
         です！
+      </div>
+    </section>
+    <section>
+      <div>
+        <span class="<%= change_24h >= 0 ? 'up' : 'down' %>"><%= change_24h %>%</span> / 24h
+      </div>
+      <div>
+        <span class="<%= change_7d >= 0 ? 'up' : 'down' %>"><%= change_7d %>%</span> / 7d
+      </div>
+      <div>
+        <span class="<%= change_30d >= 0 ? 'up' : 'down' %>"><%= change_30d %>%</span> / 30d
       </div>
     </section>
   </body>

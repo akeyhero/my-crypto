@@ -18,10 +18,10 @@ CONFIG = Struct \
 
 API_URL = "https://api.coinpaprika.com/v1/tickers/%{coin_id}?quotes=%{currency}"
 
-def fetch_price
+def fetch_data
   url = API_URL % { coin_id: CONFIG.coin_id, currency: CONFIG.currency }
-  data = OpenURI.open_uri(url) { |io|JSON.parse(io.read) }
-  data['quotes'][CONFIG.currency]['price']
+  whole_data = OpenURI.open_uri(url) { |io|JSON.parse(io.read) }
+  whole_data['quotes'][CONFIG.currency]
 end
 
 def get_total(price)
@@ -35,11 +35,14 @@ def to_delimited(num, round = CONFIG.round)
 end
 
 get '/' do
-  price = fetch_price
+  data = fetch_data
   erb :index, locals: {
-    total:     to_delimited(get_total(price)),
-    my_name:   CONFIG.my_name,
-    coin_name: CONFIG.coin_name,
-    currency:  CONFIG.currency
+    total:      to_delimited(get_total(data['price'])),
+    change_24h: data['percent_change_24h'],
+    change_7d:  data['percent_change_7d'],
+    change_30d: data['percent_change_30d'],
+    my_name:    CONFIG.my_name,
+    coin_name:  CONFIG.coin_name,
+    currency:   CONFIG.currency
   }
 end
